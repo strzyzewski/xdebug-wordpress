@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Check if container name is provided as an argument
+if [ "$#" -ne 1 ]; then
+    echo -e "\nUsage: $0 container_name\n"
+    echo -e "You can get a list of running containers via the command: 'docker ps --format '{{.Names}}'\n"
+    exit 1
+fi
+
+# Define container name and Xdebug INI file path
+container_name="$1"
+xdebug_ini_path="/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini"
+
+# Install Xdebug using PECL and enable it (PECL should be installed in any WordPress image)
+docker exec -it "$container_name" bash -c "pecl install xdebug && \
+    docker-php-ext-enable xdebug"
+
+# Configure Xdebug settings
+docker exec -it "$container_name" bash -c "echo 'xdebug.mode=debug,develop' >> $xdebug_ini_path && \
+    echo 'xdebug.client_host=host.docker.internal' >> $xdebug_ini_path && \
+    echo 'xdebug.start_with_request=yes' >> $xdebug_ini_path && \
+    echo 'xdebug.client_port=9003' >> $xdebug_ini_path"
+
+# Restart Apache within the container
+docker exec -it "$container_name" bash -c "service apache2 restart"
+
+echo -e "\n\nXdebug installed and configured successfully in the $container_name container."
