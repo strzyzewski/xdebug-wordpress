@@ -17,9 +17,9 @@ This solution is designed to avoid making permanent changes to your Docker setup
 
 2. Run the script and provide your WordPress container name as an argument: `./xdebug-start your_container_name`
 
-3. The script will install Xdebug, configure it for debugging and development, set the client host, and set it to start with every request (no need for a trigger). The script sets port 9003 for XDebug. Feel free to change the port to anything you like, but don't forget to configure your debugger client accordingly. 
+3. The script will install XDebug, configure it for debugging and development, set the client host, and set it to start with every request (no need for a trigger). The script sets port 9003 for XDebug. Feel free to change the port to anything you like, but don't forget to configure your debugger client accordingly. 
 
-4. After the script is executed successfully, Xdebug will be installed and configured in your WordPress container. Now, you can use your favorite IDE (e.g. Visual Studio Code) to start debugging your PHP code. A sample configuration for VS Code is provided in the folder .vscode.
+4. After the script is executed successfully, XDebug will be installed and configured in your WordPress container. Now, you can use your favorite IDE (e.g. Visual Studio Code) to start debugging your PHP code. A sample configuration for VS Code is provided in the folder .vscode.
 
 ## Running on WSL (Windows Subsystem for Linux)
 
