@@ -2,6 +2,10 @@
 
 This repository contains a script that makes it easy to install and configure XDebug on a WordPress Docker container.
 
+## No permanent changes, everything is temporary
+
+This solution is designed to avoid making permanent changes to your Docker setup. It does not modify any Dockerfiles, and all changes will be removed when the Docker container is rebuilt. This is ideal for temporary debugging sessions without altering your Docker configuration.
+
 ## Prerequisites
 
 - Docker installed and running
