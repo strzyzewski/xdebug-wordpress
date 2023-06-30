@@ -16,10 +16,14 @@ docker exec -it "$container_name" bash -c "pecl install xdebug && \
     docker-php-ext-enable xdebug"
 
 # Configure Xdebug settings
-docker exec -it "$container_name" bash -c "echo 'xdebug.mode=debug,develop' >> $xdebug_ini_path && \
+# Change xdebug.mode=debug to xdebug.mode=develop,debug if you want to use overloaded var_dump() function
+docker exec -it "$container_name" bash -c "echo 'xdebug.mode=debug' >> $xdebug_ini_path && \
     echo 'xdebug.client_host=host.docker.internal' >> $xdebug_ini_path && \
     echo 'xdebug.start_with_request=yes' >> $xdebug_ini_path && \
-    echo 'xdebug.client_port=9003' >> $xdebug_ini_path"
+    echo 'xdebug.client_port=9003' >> $xdebug_ini_path && \
+    echo 'xdebug.overload_var_dump=0' >> $xdebug_ini_path"
+    
+    
 
 # Restart Apache within the container
 docker exec -it "$container_name" bash -c "service apache2 restart"
