@@ -7,7 +7,7 @@
       "request": "launch",
       "port": 9003,
       "pathMappings": {
-        "/var/www/html": "${workspaceFolder}"
+        "/var/www/html/wp-content/plugins/some-plugin-i-am-developing": "${workspaceFolder}"
       },
       "hostname": "127.0.0.1"
     },
