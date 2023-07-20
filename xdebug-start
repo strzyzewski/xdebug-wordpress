@@ -23,7 +23,15 @@ docker exec -it "$container_name" bash -c "echo 'xdebug.mode=debug' >> $xdebug_i
     echo 'xdebug.client_port=9003' >> $xdebug_ini_path && \
     echo 'xdebug.overload_var_dump=0' >> $xdebug_ini_path"
     
-    
+# Install the plugin
+plugin_path_on_host="./wp-content/plugins/wordpress-docker-xdebug/plugin.php"
+plugin_path_on_container="/var/www/html/wp-content/plugins/wordpress-docker-xdebug/plugin.php"
+
+# Create the directory in the container
+docker exec -it "$container_name" mkdir -p "$(dirname "$plugin_path_on_container")"
+
+# Now, copy the plugin file
+docker cp "$plugin_path_on_host" "$container_name:$plugin_path_on_container"
 
 # Restart Apache within the container
 docker exec -it "$container_name" bash -c "service apache2 restart"
