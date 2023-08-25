@@ -3,7 +3,9 @@
 # Check if container name is provided as an argument
 if [ "$#" -ne 1 ]; then
     echo -e "\nUsage: $0 container_name\n"
-    echo -e "You can get a list of running containers via the command: 'docker ps --format '{{.Names}}'\n"
+    echo -e "Try one of the following container names:\n"
+    docker ps --format '{{.Names}}'
+    echo -e
     exit 1
 fi
 
